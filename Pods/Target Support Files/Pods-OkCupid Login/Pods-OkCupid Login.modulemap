@@ -1,0 +1,6 @@
+framework module Pods_OkCupid_Login {
+  umbrella header "Pods-OkCupid Login-umbrella.h"
+
+  export *
+  module * { export * }
+}

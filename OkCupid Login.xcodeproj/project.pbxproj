@@ -7,21 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		980883371EAE3C6600FEA268 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 980883361EAE3C6600FEA268 /* GoogleService-Info.plist */; };
+		980883391EAE40C700FEA268 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980883381EAE40C700FEA268 /* FirebaseManager.swift */; };
+		9808833B1EAE449200FEA268 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833A1EAE449200FEA268 /* Extensions.swift */; };
+		9808833D1EAE483D00FEA268 /* HorizontalButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */; };
+		9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */; };
+		983B0A5C1EAD1E0E0033018E /* InitialSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */; };
 		98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A21EABB79D000977A5 /* AppDelegate.swift */; };
 		98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A41EABB79D000977A5 /* ViewController.swift */; };
-		98ED40A81EABB79D000977A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40A61EABB79D000977A5 /* Main.storyboard */; };
 		98ED40AA1EABB79D000977A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40A91EABB79D000977A5 /* Assets.xcassets */; };
 		98ED40AD1EABB79D000977A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */; };
+		98ED40B51EABBADF000977A5 /* EmailPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */; };
+		98ED40B71EABBB60000977A5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40B61EABBB60000977A5 /* Colors.swift */; };
+		98ED40B91EABC668000977A5 /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40B81EABC668000977A5 /* SignupButton.swift */; };
+		98ED40BC1EABD4A5000977A5 /* LoginButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */; };
+		98EE4AA81EAD252400258BB3 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EE4AA71EAD252400258BB3 /* LogoView.swift */; };
+		98EE4AAA1EAD508500258BB3 /* LoginWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EE4AA91EAD508500258BB3 /* LoginWithEmailViewController.swift */; };
+		F21565C139C85C17E8908A26 /* Pods_OkCupid_Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C605E18A85B25D7C4E16EC8A /* Pods_OkCupid_Login.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		685C09F877F6D8758CB9AFC5 /* Pods-OkCupid Login.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OkCupid Login.release.xcconfig"; path = "Pods/Target Support Files/Pods-OkCupid Login/Pods-OkCupid Login.release.xcconfig"; sourceTree = "<group>"; };
+		75D8812E8AD88CA8C5A6AA00 /* Pods-OkCupid Login.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OkCupid Login.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OkCupid Login/Pods-OkCupid Login.debug.xcconfig"; sourceTree = "<group>"; };
+		980883361EAE3C6600FEA268 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		980883381EAE40C700FEA268 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		9808833A1EAE449200FEA268 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalButtonStackView.swift; sourceTree = "<group>"; };
+		9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialSignUpViewController.swift; path = ../InitialSignUpViewController.swift; sourceTree = "<group>"; };
 		98ED409F1EABB79D000977A5 /* OkCupid Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OkCupid Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ED40A21EABB79D000977A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ED40A41EABB79D000977A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		98ED40A71EABB79D000977A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		98ED40A91EABB79D000977A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98ED40AC1EABB79D000977A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		98ED40AE1EABB79D000977A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailPasswordView.swift; sourceTree = "<group>"; };
+		98ED40B61EABBB60000977A5 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		98ED40B81EABC668000977A5 /* SignupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupButton.swift; sourceTree = "<group>"; };
+		98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButtonView.swift; sourceTree = "<group>"; };
+		98EE4AA71EAD252400258BB3 /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		98EE4AA91EAD508500258BB3 /* LoginWithEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithEmailViewController.swift; sourceTree = "<group>"; };
+		C605E18A85B25D7C4E16EC8A /* Pods_OkCupid_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OkCupid_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +55,62 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21565C139C85C17E8908A26 /* Pods_OkCupid_Login.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		231D3555E1FF7ADF870B7919 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75D8812E8AD88CA8C5A6AA00 /* Pods-OkCupid Login.debug.xcconfig */,
+				685C09F877F6D8758CB9AFC5 /* Pods-OkCupid Login.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3A77426FDAE7FABBB9F90C22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C605E18A85B25D7C4E16EC8A /* Pods_OkCupid_Login.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		985F3B3B1EAED1B90012F027 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				98ED40A41EABB79D000977A5 /* ViewController.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		985F3B3C1EAED1CC0012F027 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				980883381EAE40C700FEA268 /* FirebaseManager.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		985F3B3D1EAED2140012F027 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				98ED40B61EABBB60000977A5 /* Colors.swift */,
+				9808833A1EAE449200FEA268 /* Extensions.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		98ED40961EABB79C000977A5 = {
 			isa = PBXGroup;
 			children = (
 				98ED40A11EABB79D000977A5 /* OkCupid Login */,
 				98ED40A01EABB79D000977A5 /* Products */,
+				231D3555E1FF7ADF870B7919 /* Pods */,
+				3A77426FDAE7FABBB9F90C22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +126,39 @@
 			isa = PBXGroup;
 			children = (
 				98ED40A21EABB79D000977A5 /* AppDelegate.swift */,
-				98ED40A41EABB79D000977A5 /* ViewController.swift */,
-				98ED40A61EABB79D000977A5 /* Main.storyboard */,
+				985F3B3D1EAED2140012F027 /* Resources */,
+				985F3B3C1EAED1CC0012F027 /* Networking */,
+				98EE4AAB1EAD602B00258BB3 /* View Controllers */,
+				98ED40BA1EABD2AD000977A5 /* Custom Views */,
+				985F3B3B1EAED1B90012F027 /* Supporting Files */,
 				98ED40A91EABB79D000977A5 /* Assets.xcassets */,
 				98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */,
+				980883361EAE3C6600FEA268 /* GoogleService-Info.plist */,
 				98ED40AE1EABB79D000977A5 /* Info.plist */,
 			);
 			path = "OkCupid Login";
+			sourceTree = "<group>";
+		};
+		98ED40BA1EABD2AD000977A5 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				98ED40B81EABC668000977A5 /* SignupButton.swift */,
+				98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */,
+				98EE4AA71EAD252400258BB3 /* LogoView.swift */,
+				9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */,
+				98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		98EE4AAB1EAD602B00258BB3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */,
+				98EE4AA91EAD508500258BB3 /* LoginWithEmailViewController.swift */,
+				9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98ED40B11EABB79D000977A5 /* Build configuration list for PBXNativeTarget "OkCupid Login" */;
 			buildPhases = (
+				A95F247990154DDD0F4C7490 /* [CP] Check Pods Manifest.lock */,
 				98ED409B1EABB79D000977A5 /* Sources */,
 				98ED409C1EABB79D000977A5 /* Frameworks */,
 				98ED409D1EABB79D000977A5 /* Resources */,
+				7DE650CF41A952B01D290056 /* [CP] Embed Pods Frameworks */,
+				8AC6903B990E5C56128FBE86 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,20 +224,79 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980883371EAE3C6600FEA268 /* GoogleService-Info.plist in Resources */,
 				98ED40AD1EABB79D000977A5 /* LaunchScreen.storyboard in Resources */,
 				98ED40AA1EABB79D000977A5 /* Assets.xcassets in Resources */,
-				98ED40A81EABB79D000977A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7DE650CF41A952B01D290056 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OkCupid Login/Pods-OkCupid Login-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AC6903B990E5C56128FBE86 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OkCupid Login/Pods-OkCupid Login-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A95F247990154DDD0F4C7490 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		98ED409B1EABB79D000977A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98EE4AAA1EAD508500258BB3 /* LoginWithEmailViewController.swift in Sources */,
+				983B0A5C1EAD1E0E0033018E /* InitialSignUpViewController.swift in Sources */,
+				980883391EAE40C700FEA268 /* FirebaseManager.swift in Sources */,
+				98ED40B51EABBADF000977A5 /* EmailPasswordView.swift in Sources */,
+				98ED40B71EABBB60000977A5 /* Colors.swift in Sources */,
+				9808833D1EAE483D00FEA268 /* HorizontalButtonStackView.swift in Sources */,
+				9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */,
 				98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */,
+				98ED40B91EABC668000977A5 /* SignupButton.swift in Sources */,
+				98EE4AA81EAD252400258BB3 /* LogoView.swift in Sources */,
+				98ED40BC1EABD4A5000977A5 /* LoginButtonView.swift in Sources */,
+				9808833B1EAE449200FEA268 /* Extensions.swift in Sources */,
 				98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,14 +304,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		98ED40A61EABB79D000977A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				98ED40A71EABB79D000977A5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -259,10 +410,12 @@
 		};
 		98ED40B21EABB79D000977A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75D8812E8AD88CA8C5A6AA00 /* Pods-OkCupid Login.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 26Z24PM6F7;
 				INFOPLIST_FILE = "OkCupid Login/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.clukapp.OkCupid-Login";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -272,10 +425,12 @@
 		};
 		98ED40B31EABB79D000977A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 685C09F877F6D8758CB9AFC5 /* Pods-OkCupid Login.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 26Z24PM6F7;
 				INFOPLIST_FILE = "OkCupid Login/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.clukapp.OkCupid-Login";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +457,7 @@
 				98ED40B31EABB79D000977A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
