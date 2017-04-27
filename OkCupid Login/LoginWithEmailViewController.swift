@@ -1,15 +1,8 @@
-//
-//  LoginWithEmailViewController.swift
-//  OkCupid Login
-//
-//  Created by Robert Rozenvasser on 4/23/17.
-//  Copyright © 2017 Robert Rozenvasser. All rights reserved.
-//
 
 import UIKit
 
 class LoginWithEmailViewController: UIViewController, UITextFieldDelegate {
-
+    
     var emailPasswordView: EmailPasswordView!
     var lineDividerView: UIView!
     var facebookButton: SignupButton!

@@ -36,7 +36,7 @@ class BirthYearCell: UICollectionViewCell {
     
     var yearIsSelected: Bool = false {
         didSet {
-            contentView.backgroundColor = yearIsSelected ?  Palette.darkHeader.color : Palette.lightBlue.color
+            contentView.backgroundColor = yearIsSelected ?  Palette.birthYearDark.color : Palette.birthYearLight.color
         }
     }
     
@@ -56,7 +56,7 @@ class BirthYearCell: UICollectionViewCell {
     }
     
     private func commonInit() {
-        contentView.backgroundColor = Palette.lightBlue.color
+        contentView.backgroundColor = Palette.birthYearLight.color
         contentView.addSubview(yearLabel)
         yearLabel.translatesAutoresizingMaskIntoConstraints = false
         yearLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
@@ -64,7 +64,7 @@ class BirthYearCell: UICollectionViewCell {
     }
     
     func deselectCell() {
-        contentView.backgroundColor = Palette.lightBlue.color
+        contentView.backgroundColor = Palette.birthYearLight.color
     }
 
 }

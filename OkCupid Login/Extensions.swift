@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    
     override open func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let relativeFrame = self.bounds
         let hitTestEdgeInsets = UIEdgeInsetsMake(-26, -26, -26, -26)

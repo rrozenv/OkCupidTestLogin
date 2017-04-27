@@ -1,56 +1,56 @@
-//
-//  UserInfoViewController.swift
-//  OkCupid Login
-//
-//  Created by Robert Rozenvasser on 4/24/17.
-//  Copyright © 2017 Robert Rozenvasser. All rights reserved.
-//
 
 import UIKit
 
-struct DeviceSize {
-    var viewWidth: CGFloat = UIScreen.main.bounds.width //375
-    var viewHeight: CGFloat = UIScreen.main.bounds.height //667
-}
-
-class UserInfoViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class UserInfoViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
-    lazy var viewWidth: CGFloat = self.view.frame.width
-    lazy var viewHeight: CGFloat = self.view.frame.height
-    lazy var itemWidth: CGFloat = self.view.frame.width * (269/self.view.frame.width)
-    lazy var itemHeight: CGFloat = self.view.frame.height * (45/self.view.frame.height)
+    fileprivate var doneButton: UIButton!
+    fileprivate var userInfoImageView: UIImageView!
     
-    //Selected time for collection view
-    let selectHourCollectionViewLayout = UICollectionViewFlowLayout()
-    lazy var selectHourCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.selectHourCollectionViewLayout)
-    let cellID = "BirthYear"
+    //Select Birth Year Properties
+    fileprivate let birthYearCollViewLayout = UICollectionViewFlowLayout()
+    lazy var itemWidth: CGFloat = DeviceSize.viewWidth * (269/375)
+    lazy var itemHeight: CGFloat = DeviceSize.viewHeight * (45/667)
+    fileprivate lazy var birthYearCollView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.birthYearCollViewLayout)
+    fileprivate var years = [Year]()
+    fileprivate let cellID = "BirthYear"
+    fileprivate var currentYear: Year?
+    fileprivate var currentYearIndexPath: IndexPath?
+    fileprivate var selectBirthYearLabel: UILabel!
+    fileprivate var birthYearLineDividerView: UIView!
     
-    var selectedYear: Year?
-    var previouslySelectedIndexPath: IndexPath?
-    var years: [Year] = [Year("1999"), Year("1999"), Year("1999"), Year("1999"), Year("1999"), Year("1999")]
+    //Select Gender Properties
+    fileprivate var currentGender: ButtonWithLabel?
+    fileprivate var genderElementsStackView: UIStackView!
+    fileprivate var selectGenderLabel: UILabel!
+    fileprivate var genderLineDivider: UIView!
+    fileprivate var genderOptionsStackView: HorizontalButtonStackView! {
+        didSet {
+            genderOptionsStackView.views.forEach {
+                let gesture = UITapGestureRecognizer(target: self, action: #selector(didSelectGender(_:)))
+                $0.addGestureRecognizer(gesture)
+            }
+        }
+    }
     
-    var selectGenderLabel: UILabel!
-    var userSelectGender: HorizontalButtonStackView!
-    var currentlySelectedGender: ButtonWithLabel?
-    var lineDividerViewOne: UIView!
-    var genderStackView: UIStackView!
+    //Select Interest Properties
+    fileprivate var currentInterest: ButtonWithLabel?
+    fileprivate var interestedInElementsStackView: UIStackView!
+    fileprivate var selectInterestLabel: UILabel!
+    fileprivate var interestLineDivider: UIView!
+    fileprivate var interestedInOptionsStackView: HorizontalButtonStackView! {
+        didSet {
+            interestedInOptionsStackView.views.forEach {
+                let gesture = UITapGestureRecognizer(target: self, action: #selector(didSelectInterest(_:)))
+                $0.addGestureRecognizer(gesture)
+            }
+        }
+    }
     
-    var selectInterestLabel: UILabel!
-    var userSelectInterest: HorizontalButtonStackView!
-    var currentlySelectedInterest: ButtonWithLabel?
-    var lineDividerViewTwo: UIView!
-    var interestStackView: UIStackView!
-    
-    var selectBirthYearLabel: UILabel!
-    var lineDividerViewThree: UIView!
-    
-    var doneButton: UIButton!
-    var userInfoImageView: UIImageView!
-  
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setupDoneButton()
+        setupBirthYears()
         
         //Select birth year views
         setupLineDividerViewThree()
@@ -72,7 +72,7 @@ class UserInfoViewController: UIViewController, UICollectionViewDataSource, UICo
         
         setupUserInfoImageView()
     }
-    
+
     override var prefersStatusBarHidden: Bool { return true }
     
 }
@@ -81,46 +81,45 @@ class UserInfoViewController: UIViewController, UICollectionViewDataSource, UICo
 
 extension UserInfoViewController {
     
-    func didSelectGender(_ sender: UITapGestureRecognizer) {
-        let button = sender.view as! ButtonWithLabel
-        currentlySelectedGender?.isSelected = false
-        currentlySelectedGender = button
-        currentlySelectedGender?.isSelected = true
-        
-        if currentlySelectedGender != nil && currentlySelectedInterest != nil && selectedYear != nil {
-            doneButton.alpha = 1.0
-        }
+    @objc fileprivate func didSelectGender(_ sender: UITapGestureRecognizer) {
+        let button = sender.view as? ButtonWithLabel
+        currentGender?.isSelected = false
+        currentGender = button
+        currentGender?.isSelected = true
+        checkIfDoneButtonShouldBePresented()
     }
     
-    func didSelectInterest(_ sender: UITapGestureRecognizer) {
-        let button = sender.view as! ButtonWithLabel
-        currentlySelectedInterest?.isSelected = false
-        currentlySelectedInterest = button
-        currentlySelectedInterest?.isSelected = true
-        
-        if currentlySelectedGender != nil && currentlySelectedInterest != nil && selectedYear != nil {
-            doneButton.alpha = 1.0
-        }
+    @objc fileprivate func didSelectInterest(_ sender: UITapGestureRecognizer) {
+        let button = sender.view as? ButtonWithLabel
+        currentInterest?.isSelected = false
+        currentInterest = button
+        currentInterest?.isSelected = true
+        checkIfDoneButtonShouldBePresented()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! BirthYearCell
-        guard !cell.year.isSelected else { return }
-
-        if let currentYear = selectedYear, let previousIndexPath = previouslySelectedIndexPath {
-            currentYear.isSelected = false
-            let previousCell = collectionView.cellForItem(at: previousIndexPath) as? BirthYearCell
-            previousCell?.deselectCell()
+        if let cell = collectionView.cellForItem(at: indexPath) as? BirthYearCell {
+            guard !cell.year.isSelected else { return }
+            
+            if let currentYear = currentYear, let previousIndexPath = currentYearIndexPath {
+                currentYear.isSelected = false
+                let previousCell = collectionView.cellForItem(at: previousIndexPath) as? BirthYearCell
+                previousCell?.deselectCell()
+            }
+            
+            cell.year.isSelected = true
+            cell.year = years[indexPath.row]
+            currentYear = cell.year
+            
+            let currentIndexPath = collectionView.indexPath(for: cell)
+            currentYearIndexPath = currentIndexPath
+            
+            checkIfDoneButtonShouldBePresented()
         }
-        
-        cell.year.isSelected = true
-        cell.year = years[indexPath.row]
-        selectedYear = cell.year
-        
-        let currentIndexPath = collectionView.indexPath(for: cell)
-        previouslySelectedIndexPath = currentIndexPath
-        
-        if currentlySelectedGender != nil && currentlySelectedInterest != nil && selectedYear != nil {
+    }
+    
+    fileprivate func checkIfDoneButtonShouldBePresented() {
+        if currentGender != nil && currentInterest != nil && currentYear != nil {
             doneButton.alpha = 1.0
         }
     }
@@ -129,7 +128,16 @@ extension UserInfoViewController {
 
 //MARK: Birth Year Collection View DataSource
 
-extension UserInfoViewController {
+extension UserInfoViewController: UICollectionViewDataSource {
+    
+    fileprivate func setupBirthYears() {
+        var startYear = 2000
+        for _ in 0...50 {
+            let year: Year = Year("\(startYear)")
+            years.append(year)
+            startYear -= 1
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return years.count
@@ -152,7 +160,7 @@ extension UserInfoViewController {
 extension UserInfoViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return viewWidth * (10/viewWidth)
+        return DeviceSize.viewWidth * (10/375)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -169,7 +177,7 @@ extension UserInfoViewController {
 
 extension UserInfoViewController {
     
-    func setupDoneButton() {
+    fileprivate func setupDoneButton() {
         doneButton = UIButton()
         doneButton.setTitle("Done", for: .normal)
         doneButton.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 14)
@@ -184,54 +192,54 @@ extension UserInfoViewController {
         doneButton.heightAnchor.constraint(equalToConstant: 65).isActive = true
     }
     
-    func setupLineDividerViewThree() {
-        lineDividerViewThree = UIView()
-        lineDividerViewThree.backgroundColor = Palette.lightGrey.color
-        lineDividerViewThree.layer.cornerRadius = 2.0
-        lineDividerViewThree.layer.masksToBounds = true
+    fileprivate func setupLineDividerViewThree() {
+        birthYearLineDividerView = UIView()
+        birthYearLineDividerView.backgroundColor = Palette.lightGrey.color
+        birthYearLineDividerView.layer.cornerRadius = 2.0
+        birthYearLineDividerView.layer.masksToBounds = true
         
-        view.addSubview(lineDividerViewThree)
-        lineDividerViewThree.translatesAutoresizingMaskIntoConstraints = false
-        lineDividerViewThree.heightAnchor.constraint(equalToConstant: viewHeight * (3/667)).isActive = true
-        lineDividerViewThree.widthAnchor.constraint(equalToConstant: viewWidth * (270/375)).isActive = true
-        lineDividerViewThree.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 53).isActive = true
-        lineDividerViewThree.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: -28).isActive = true
+        view.addSubview(birthYearLineDividerView)
+        birthYearLineDividerView.translatesAutoresizingMaskIntoConstraints = false
+        birthYearLineDividerView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (3/667)).isActive = true
+        birthYearLineDividerView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (270/375)).isActive = true
+        birthYearLineDividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DeviceSize.viewWidth * (53/375)).isActive = true
+        birthYearLineDividerView.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: -DeviceSize.viewHeight * (28/667)).isActive = true
     }
     
-    func setupCollectionViewLayout() {
-        let leftInset: CGFloat = 53
-        let itemWidth = viewWidth * (83/viewWidth)
-        let itemHeight = viewHeight * (45/viewHeight)
-        selectHourCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: leftInset)
-        selectHourCollectionViewLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        selectHourCollectionViewLayout.scrollDirection = .horizontal
+    fileprivate func setupCollectionViewLayout() {
+        let leftInset: CGFloat = DeviceSize.viewWidth * (53/375)
+        let itemWidth = DeviceSize.viewWidth * (83/375)
+        let itemHeight = DeviceSize.viewHeight * (45/667)
+        birthYearCollViewLayout.sectionInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: leftInset)
+        birthYearCollViewLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        birthYearCollViewLayout.scrollDirection = .horizontal
     }
     
-    func setupCollectionView() {
-        selectHourCollectionView.backgroundColor = UIColor.white
-        selectHourCollectionView.allowsMultipleSelection = false
-        selectHourCollectionView.showsHorizontalScrollIndicator = false
-        selectHourCollectionView.delegate = self
-        selectHourCollectionView.dataSource = self
-        selectHourCollectionView.register(BirthYearCell.self, forCellWithReuseIdentifier: cellID)
+    fileprivate func setupCollectionView() {
+        birthYearCollView.backgroundColor = UIColor.white
+        birthYearCollView.allowsMultipleSelection = false
+        birthYearCollView.showsHorizontalScrollIndicator = false
+        birthYearCollView.delegate = self
+        birthYearCollView.dataSource = self
+        birthYearCollView.register(BirthYearCell.self, forCellWithReuseIdentifier: cellID)
         
-        view.addSubview(selectHourCollectionView)
-        selectHourCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        selectHourCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        selectHourCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        selectHourCollectionView.bottomAnchor.constraint(equalTo: lineDividerViewThree.topAnchor, constant: -viewHeight * (15/viewHeight)).isActive = true
-        selectHourCollectionView.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
+        view.addSubview(birthYearCollView)
+        birthYearCollView.translatesAutoresizingMaskIntoConstraints = false
+        birthYearCollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        birthYearCollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        birthYearCollView.bottomAnchor.constraint(equalTo: birthYearLineDividerView.topAnchor, constant: -DeviceSize.viewHeight * (15/667)).isActive = true
+        birthYearCollView.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
     }
     
-    func setupSelectBirthYearLabel() {
+    fileprivate func setupSelectBirthYearLabel() {
         selectBirthYearLabel = UILabel()
         selectBirthYearLabel.text = "I was born in..."
         selectBirthYearLabel.font = UIFont(name: "Avenir-Black", size: 14)
         
         view.addSubview(selectBirthYearLabel)
         selectBirthYearLabel.translatesAutoresizingMaskIntoConstraints = false
-        selectBirthYearLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 53).isActive = true
-        selectBirthYearLabel.bottomAnchor.constraint(equalTo: selectHourCollectionView.topAnchor, constant: -15).isActive = true
+        selectBirthYearLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DeviceSize.viewWidth * (53/375)).isActive = true
+        selectBirthYearLabel.bottomAnchor.constraint(equalTo: birthYearCollView.topAnchor, constant: -DeviceSize.viewHeight * (15/667)).isActive = true
     }
     
 }
@@ -240,27 +248,22 @@ extension UserInfoViewController {
 
 extension UserInfoViewController {
     
-    func setupLineDividerViewTwo() {
-        lineDividerViewTwo = UIView()
-        lineDividerViewTwo.backgroundColor = Palette.lightGrey.color
-        lineDividerViewTwo.layer.cornerRadius = 2.0
-        lineDividerViewTwo.layer.masksToBounds = true
+    fileprivate func setupLineDividerViewTwo() {
+        interestLineDivider = UIView()
+        interestLineDivider.backgroundColor = Palette.lightGrey.color
+        interestLineDivider.layer.cornerRadius = 2.0
+        interestLineDivider.layer.masksToBounds = true
         
-        lineDividerViewTwo.heightAnchor.constraint(equalToConstant: viewHeight * (3/667)).isActive = true
-        lineDividerViewTwo.widthAnchor.constraint(equalToConstant: viewWidth * (270/375)).isActive = true
+        interestLineDivider.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (3/667)).isActive = true
+        interestLineDivider.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (270/375)).isActive = true
     }
     
-    func setupSelectInterestButtons() {
-        userSelectInterest = HorizontalButtonStackView(backgroundColor: Palette.lightGrey.color, textColor: Palette.grey.color, textLabels: ["men", "women", "both"], numberOfViews: 3)
+    fileprivate func setupSelectInterestButtons() {
+        interestedInOptionsStackView = HorizontalButtonStackView(backgroundColor: Palette.interestPurpleLight.color, textColor: UIColor.white, textLabels: ["men", "women", "both"], numberOfViews: 3)
         
-        for button in userSelectInterest.buttons {
-            let didSelectGenderGesture = UITapGestureRecognizer(target: self, action: #selector(didSelectInterest(_:)))
-            button.addGestureRecognizer(didSelectGenderGesture)
-        }
-        
-        userSelectInterest.translatesAutoresizingMaskIntoConstraints = false
-        userSelectInterest.widthAnchor.constraint(equalToConstant: 270).isActive = true
-        userSelectInterest.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        interestedInOptionsStackView.translatesAutoresizingMaskIntoConstraints = false
+        interestedInOptionsStackView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (270/375)).isActive = true
+        interestedInOptionsStackView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (45/667)).isActive = true
     }
 
     func setupSelectInterestLabel() {
@@ -270,20 +273,17 @@ extension UserInfoViewController {
     }
     
     func setupStackViewForInterestElements() {
-        interestStackView = UIStackView()
-        interestStackView.addArrangedSubview(selectInterestLabel)
-        interestStackView.addArrangedSubview(userSelectInterest)
-        interestStackView.addArrangedSubview(lineDividerViewTwo)
+        let views = [selectInterestLabel, interestedInOptionsStackView, interestLineDivider]
+        interestedInElementsStackView = UIStackView(arrangedSubviews: views as! [UIView])
+        interestedInElementsStackView.axis = .vertical
+        interestedInElementsStackView.distribution = .equalSpacing
+        interestedInElementsStackView.alignment = .leading
+        interestedInElementsStackView.spacing = 15
         
-        interestStackView.axis = .vertical
-        interestStackView.distribution = .equalSpacing
-        interestStackView.alignment = .leading
-        interestStackView.spacing = 15
-        
-        view.addSubview(interestStackView)
-        interestStackView.translatesAutoresizingMaskIntoConstraints = false
-        interestStackView.bottomAnchor.constraint(equalTo: selectBirthYearLabel.topAnchor, constant: -30).isActive = true
-        interestStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(interestedInElementsStackView)
+        interestedInElementsStackView.translatesAutoresizingMaskIntoConstraints = false
+        interestedInElementsStackView.bottomAnchor.constraint(equalTo: selectBirthYearLabel.topAnchor, constant: -DeviceSize.viewHeight * (30/667)).isActive = true
+        interestedInElementsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
 }
@@ -299,42 +299,36 @@ extension UserInfoViewController {
     }
     
     func setupSelectGenderButtons() {
-        userSelectGender = HorizontalButtonStackView(backgroundColor: Palette.navy.color, textColor: UIColor.white, textLabels: ["man", "woman", "neither"], numberOfViews: 3)
+        genderOptionsStackView = HorizontalButtonStackView(backgroundColor: Palette.genderBlue.color, textColor: UIColor.white, textLabels: ["man", "woman", "neither"], numberOfViews: 3)
         
-        for button in userSelectGender.buttons {
-            let didSelectGenderGesture = UITapGestureRecognizer(target: self, action: #selector(didSelectGender(_:)))
-            button.addGestureRecognizer(didSelectGenderGesture)
-        }
-        
-        userSelectGender.translatesAutoresizingMaskIntoConstraints = false
-        userSelectGender.widthAnchor.constraint(equalToConstant: 270).isActive = true
-        userSelectGender.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        genderOptionsStackView.translatesAutoresizingMaskIntoConstraints = false
+        genderOptionsStackView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (270/375)).isActive = true
+        genderOptionsStackView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (45/667)).isActive = true
     }
     
     func setupLineDividerView() {
-        lineDividerViewOne = UIView()
-        lineDividerViewOne.backgroundColor = Palette.lightGrey.color
-        lineDividerViewOne.layer.cornerRadius = 2.0
-        lineDividerViewOne.layer.masksToBounds = true
+        genderLineDivider = UIView()
+        genderLineDivider.backgroundColor = Palette.lightGrey.color
+        genderLineDivider.layer.cornerRadius = 2.0
+        genderLineDivider.layer.masksToBounds = true
         
-        lineDividerViewOne.translatesAutoresizingMaskIntoConstraints = false
-        lineDividerViewOne.heightAnchor.constraint(equalToConstant: viewHeight * (3/667)).isActive = true
-        lineDividerViewOne.widthAnchor.constraint(equalToConstant: viewWidth * (270/375)).isActive = true
+        genderLineDivider.translatesAutoresizingMaskIntoConstraints = false
+        genderLineDivider.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (3/667)).isActive = true
+        genderLineDivider.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (270/375)).isActive = true
     }
     
     func setupStackViewForGenderElements() {
-        let views = [selectGenderLabel, userSelectGender, lineDividerViewOne]
+        let views = [selectGenderLabel, genderOptionsStackView, genderLineDivider]
+        genderElementsStackView = UIStackView(arrangedSubviews: views as! [UIView])
+        genderElementsStackView.axis = .vertical
+        genderElementsStackView.distribution = .equalSpacing
+        genderElementsStackView.alignment = .leading
+        genderElementsStackView.spacing = 15
         
-        genderStackView = UIStackView(arrangedSubviews: views as! [UIView])
-        genderStackView.axis = .vertical
-        genderStackView.distribution = .equalSpacing
-        genderStackView.alignment = .leading
-        genderStackView.spacing = 15
-        
-        view.addSubview(genderStackView)
-        genderStackView.translatesAutoresizingMaskIntoConstraints = false
-        genderStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        genderStackView.bottomAnchor.constraint(equalTo: interestStackView.topAnchor, constant: -30).isActive = true
+        view.addSubview(genderElementsStackView)
+        genderElementsStackView.translatesAutoresizingMaskIntoConstraints = false
+        genderElementsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        genderElementsStackView.bottomAnchor.constraint(equalTo: interestedInElementsStackView.topAnchor, constant: -DeviceSize.viewHeight * (30/667)).isActive = true
     }
     
     func setupUserInfoImageView() {
@@ -344,10 +338,10 @@ extension UserInfoViewController {
         
         view.addSubview(userInfoImageView)
         userInfoImageView.translatesAutoresizingMaskIntoConstraints = false
-        userInfoImageView.heightAnchor.constraint(equalToConstant: 162).isActive = true
-        userInfoImageView.widthAnchor.constraint(equalToConstant: 260).isActive = true
+        userInfoImageView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (162/667)).isActive = true
+        userInfoImageView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (260/375)).isActive = true
         userInfoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        userInfoImageView.bottomAnchor.constraint(equalTo: genderStackView.topAnchor, constant: -32).isActive = true
+        userInfoImageView.bottomAnchor.constraint(equalTo: genderElementsStackView.topAnchor, constant: -DeviceSize.viewHeight * (32/667)).isActive = true
     }
 
 }

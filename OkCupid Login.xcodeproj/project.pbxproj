@@ -13,7 +13,7 @@
 		9808833D1EAE483D00FEA268 /* HorizontalButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */; };
 		9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */; };
 		983B0A5C1EAD1E0E0033018E /* InitialSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */; };
-		98757BC91EB0FB5900BF3BA8 /* BirthYearCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757BC81EB0FB5900BF3BA8 /* BirthYearCollectionViewCell.swift */; };
+		9842D0BC1EB261EF00730448 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842D0BB1EB261EF00730448 /* DeviceSize.swift */; };
 		98757BCB1EB0FC3900BF3BA8 /* BirthYearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */; };
 		98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A21EABB79D000977A5 /* AppDelegate.swift */; };
 		98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A41EABB79D000977A5 /* ViewController.swift */; };
@@ -37,7 +37,7 @@
 		9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalButtonStackView.swift; sourceTree = "<group>"; };
 		9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialSignUpViewController.swift; path = ../InitialSignUpViewController.swift; sourceTree = "<group>"; };
-		98757BC81EB0FB5900BF3BA8 /* BirthYearCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthYearCollectionViewCell.swift; sourceTree = "<group>"; };
+		9842D0BB1EB261EF00730448 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
 		98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthYearCell.swift; sourceTree = "<group>"; };
 		98ED409F1EABB79D000977A5 /* OkCupid Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OkCupid Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ED40A21EABB79D000977A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 		985F3B3D1EAED2140012F027 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9842D0BB1EB261EF00730448 /* DeviceSize.swift */,
 				98ED40B61EABBB60000977A5 /* Colors.swift */,
 				9808833A1EAE449200FEA268 /* Extensions.swift */,
 			);
@@ -147,11 +148,10 @@
 			isa = PBXGroup;
 			children = (
 				98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */,
-				98757BC81EB0FB5900BF3BA8 /* BirthYearCollectionViewCell.swift */,
+				9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */,
 				98ED40B81EABC668000977A5 /* SignupButton.swift */,
 				98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */,
 				98EE4AA71EAD252400258BB3 /* LogoView.swift */,
-				9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */,
 				98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */,
 			);
 			name = "Custom Views";
@@ -296,10 +296,10 @@
 				980883391EAE40C700FEA268 /* FirebaseManager.swift in Sources */,
 				98ED40B51EABBADF000977A5 /* EmailPasswordView.swift in Sources */,
 				98757BCB1EB0FC3900BF3BA8 /* BirthYearCell.swift in Sources */,
-				98757BC91EB0FB5900BF3BA8 /* BirthYearCollectionViewCell.swift in Sources */,
 				98ED40B71EABBB60000977A5 /* Colors.swift in Sources */,
 				9808833D1EAE483D00FEA268 /* HorizontalButtonStackView.swift in Sources */,
 				9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */,
+				9842D0BC1EB261EF00730448 /* DeviceSize.swift in Sources */,
 				98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */,
 				98ED40B91EABC668000977A5 /* SignupButton.swift in Sources */,
 				98EE4AA81EAD252400258BB3 /* LogoView.swift in Sources */,

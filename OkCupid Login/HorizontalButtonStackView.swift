@@ -11,32 +11,24 @@ import UIKit
 
 class ButtonWithLabel: UIView {
     
-    var id: String = "N/A"
-    
     var isSelected = false {
         didSet {
-            switch id {
-            case "gender":
-                background.backgroundColor = isSelected ? Palette.darkHeader.color : Palette.navy.color
-            case "interest":
-                background.backgroundColor = isSelected ? Palette.grey.color : Palette.lightGrey.color
-                label.textColor = isSelected ? Palette.white.color : Palette.grey.color
-            case "birthYear":
-                background.backgroundColor = isSelected ? Palette.green.color : Palette.aqua.color
-            default:
-                print("not a valid selection")
-            }
+            background.backgroundColor = isSelected ? backgroundColors[id]?.selected : backgroundColors[id]?.notSelected
         }
     }
+    
+    private let backgroundColors = ["gender":(selected: Palette.navy.color, notSelected: Palette.genderBlue.color), "interest": (selected: Palette.interestPurpleDark.color, notSelected: Palette.interestPurpleLight.color), "birthYear": (selected: Palette.birthYearDark.color, notSelected: Palette.birthYearLight.color)]
+
+    private var id: String = "N/A"
    
-    let background: UIView = {
+    private let background: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         return view
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Medium", size: 14)
         return label
@@ -61,7 +53,7 @@ class ButtonWithLabel: UIView {
         setupLabel()
     }
     
-    func setupBackgroundView() {
+    private func setupBackgroundView() {
         self.addSubview(background)
         background.translatesAutoresizingMaskIntoConstraints = false
         background.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -70,7 +62,7 @@ class ButtonWithLabel: UIView {
         background.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func setupLabel() {
+    private func setupLabel() {
         background.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerXAnchor.constraint(equalTo: background.centerXAnchor).isActive = true
@@ -81,11 +73,8 @@ class ButtonWithLabel: UIView {
 
 class HorizontalButtonStackView: UIView {
     
-    var stackView: UIStackView!
-    var buttons = [ButtonWithLabel]()
-    
-    var containerForScrollView: UIView!
-    var scrollView: UIScrollView!
+    var views = [ButtonWithLabel]()
+    private var stackView: UIStackView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,64 +87,42 @@ class HorizontalButtonStackView: UIView {
     init(backgroundColor: UIColor, textColor: UIColor, textLabels: [String], numberOfViews: Int) {
         super.init(frame: CGRect.zero)
         self.backgroundColor = UIColor.clear
-        //setupContainerForScrollView()
         setupStackView(backgroundColor: backgroundColor, textColor: textColor, textLabels: textLabels, numberOfViews: numberOfViews)
-        //setupScrollView()
         setupStackViewConstraints()
     }
     
-//    func setupContainerForScrollView() {
-//        containerForScrollView = UIView()
-//        containerForScrollView.backgroundColor = UIColor.clear
-//        
-//        self.addSubview(containerForScrollView)
-//        containerForScrollView.translatesAutoresizingMaskIntoConstraints = false
-//        containerForScrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//        containerForScrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        containerForScrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        containerForScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//    }
-    
-    func setupScrollView() {
-        scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor.black
-        scrollView.frame = self.frame
-        scrollView.contentSize = self.stackView.frame.size
-        self.addSubview(scrollView)
-    }
-    
-    func setupStackView(backgroundColor: UIColor, textColor: UIColor, textLabels: [String], numberOfViews: Int) {
+    private func setupStackView(backgroundColor: UIColor, textColor: UIColor, textLabels: [String], numberOfViews: Int) {
         
         for index in 0...numberOfViews - 1 {
             
             var button: ButtonWithLabel?
-            
+    
             switch backgroundColor {
             
-            case Palette.navy.color:
+            case Palette.genderBlue.color:
                  button = ButtonWithLabel(id: "gender", backgroundColor: backgroundColor, textColor: textColor, textLabel: textLabels[index])
-            case Palette.lightGrey.color:
+            case Palette.interestPurpleLight.color:
                 button = ButtonWithLabel(id: "interest", backgroundColor: backgroundColor, textColor: textColor, textLabel: textLabels[index])
-            case Palette.green.color:
+            case Palette.birthYearLight.color:
                 button = ButtonWithLabel(id: "birthYear", backgroundColor: backgroundColor, textColor: textColor, textLabel: textLabels[index])
             default:
                 button = nil
             }
             
             if let button = button {
-                buttons.append(button)
+                views.append(button)
             }
            
         }
 
-        stackView = UIStackView(arrangedSubviews: buttons)
+        stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 10
     }
     
-    func setupStackViewConstraints() {
+    private func setupStackViewConstraints() {
         self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
