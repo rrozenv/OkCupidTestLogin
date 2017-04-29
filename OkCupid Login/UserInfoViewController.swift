@@ -8,8 +8,8 @@ class UserInfoViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     //Select Birth Year Properties
     fileprivate let birthYearCollViewLayout = UICollectionViewFlowLayout()
-    lazy var itemWidth: CGFloat = DeviceSize.viewWidth * (269/375)
-    lazy var itemHeight: CGFloat = DeviceSize.viewHeight * (45/667)
+    let itemWidth: CGFloat = DeviceSize.viewWidth * (269/375)
+    let itemHeight: CGFloat = DeviceSize.viewHeight * (45/667)
     fileprivate lazy var birthYearCollView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.birthYearCollViewLayout)
     fileprivate var years = [Year]()
     fileprivate let cellID = "BirthYear"
@@ -83,17 +83,17 @@ extension UserInfoViewController {
     
     @objc fileprivate func didSelectGender(_ sender: UITapGestureRecognizer) {
         let button = sender.view as? ButtonWithLabel
-        currentGender?.isSelected = false
+        currentGender?.didSelect = false
         currentGender = button
-        currentGender?.isSelected = true
+        currentGender?.didSelect = true
         checkIfDoneButtonShouldBePresented()
     }
     
     @objc fileprivate func didSelectInterest(_ sender: UITapGestureRecognizer) {
         let button = sender.view as? ButtonWithLabel
-        currentInterest?.isSelected = false
+        currentInterest?.didSelect = false
         currentInterest = button
-        currentInterest?.isSelected = true
+        currentInterest?.didSelect = true
         checkIfDoneButtonShouldBePresented()
     }
     

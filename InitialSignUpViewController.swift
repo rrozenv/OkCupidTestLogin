@@ -4,17 +4,16 @@ import SpriteKit
 
 final class InitialSignUpViewController: UIViewController {
     
-    fileprivate var loginButton: LoginButtonView! {
+    fileprivate var loginButtonView: LoginButtonView! {
         didSet {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(didPressLogIn))
-            loginButton.addGestureRecognizer(gesture)
+            loginButtonView.addGestureRecognizer(gesture)
         }
     }
     
     fileprivate var emailSignupButton: SignupButton! {
         didSet {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(didPressSignupWithEmail))
-            emailSignupButton.addGestureRecognizer(gesture)
+            emailSignupButton.addTarget(self, action: #selector(didPressSignupWithEmail), for: .touchUpInside)
         }
     }
     
@@ -41,7 +40,7 @@ final class InitialSignUpViewController: UIViewController {
         setupLoginButtonView()
         setupEmailSignupButton()
         setupFacebookSignupButton()
-        createParticles()
+        startParticleAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +50,7 @@ final class InitialSignUpViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool { return true }
-
+    
 }
 
 //MARK: Actions
@@ -76,52 +75,33 @@ extension InitialSignUpViewController {
 
 extension InitialSignUpViewController {
     
-   fileprivate func animateLoveMessage() {
+    fileprivate func animateLoveMessage() {
         self.view.layoutIfNeeded()
+        self.loveMessageLeadingAnchor.constant = -30
         UIView.animate(withDuration: 1) {
-            self.loveMessageLeadingAnchor.constant = -30
             self.view.layoutIfNeeded()
         }
     }
     
     fileprivate func animateMoleculeImage() {
         self.view.layoutIfNeeded()
+        self.moleculeImageTrailingAnchor.constant = 20
+        self.sloganImage.alpha = 1.0
         UIView.animate(withDuration: 1) {
-            self.moleculeImageTrailingAnchor.constant = 20
-            self.sloganImage.alpha = 1.0
             self.view.layoutIfNeeded()
         }
     }
     
-    fileprivate func createParticles() {
-        let particleEmitter = CAEmitterLayer()
-        particleEmitter.emitterPosition = CGPoint(x: 185, y: 183)
-        particleEmitter.emitterShape = kCAEmitterLayerPoints
-        particleEmitter.emitterSize = CGSize(width: 3, height: 3)
-        let red = makeEmitterCell(color: Palette.yellow.color)
-        let green = makeEmitterCell(color: Palette.lightBlue.color)
-        let blue = makeEmitterCell(color: Palette.pink.color)
-        particleEmitter.emitterCells = [red, green, blue]
-        view.layer.addSublayer(particleEmitter)
-    }
-    
-    fileprivate func makeEmitterCell(color: UIColor) -> CAEmitterCell {
-        let cell = CAEmitterCell()
-        cell.birthRate = 4
-        cell.lifetime = 4.0
-        cell.lifetimeRange = 0
-        cell.color = color.cgColor
-        cell.velocity = 80
-        cell.velocityRange = 10
-        cell.emissionLongitude = CGFloat.pi * -(1/2)
-        cell.emissionLatitude = 0
-        cell.emissionRange = 0.45
-        cell.spin = 0
-        cell.spinRange = 5
-        cell.scaleRange = 0
-        cell.scaleSpeed = -0.05
-        cell.contents = UIImage(named: "IC_heartParticle")?.cgImage
-        return cell
+    func startParticleAnimation() {
+        let particleColors = [Palette.yellow.color, Palette.lightBlue.color, Palette.pink.color]
+        let position = CGPoint(x: 185, y: 183)
+        let particleSize = CGSize(width: 3, height: 3)
+        if let image = UIImage(named: "IC_heartParticle")?.cgImage {
+            let emmitter = ParticleEmitterLayer(colors: particleColors, position: position, size: particleSize, image: image)
+            view.layer.addSublayer(emmitter)
+        } else {
+            print("Could not create particles.")
+        }
     }
     
 }
@@ -184,23 +164,23 @@ extension InitialSignUpViewController {
     }
     
     fileprivate func setupLoginButtonView() {
-        loginButton = LoginButtonView(labelText: "Log In")
+        loginButtonView = LoginButtonView(labelText: "Log In")
         
-        view.addSubview(loginButton)
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        view.addSubview(loginButtonView)
+        loginButtonView.translatesAutoresizingMaskIntoConstraints = false
+        loginButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        loginButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        loginButtonView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        loginButtonView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-
+    
     fileprivate func setupEmailSignupButton() {
         let emailIcon = UIImage(named: "IC_email")
         emailSignupButton = SignupButton(icon: emailIcon!, labelText: "email sign up", backgroundColor: Palette.lightGrey.color, textColor: Palette.grey.color)
         
         view.addSubview(emailSignupButton)
         emailSignupButton.translatesAutoresizingMaskIntoConstraints = false
-        emailSignupButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -30).isActive = true
+        emailSignupButton.bottomAnchor.constraint(equalTo: loginButtonView.topAnchor, constant: -30).isActive = true
         emailSignupButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         emailSignupButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         emailSignupButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -217,5 +197,5 @@ extension InitialSignUpViewController {
         facebookSignupButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         facebookSignupButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
-
+    
 }

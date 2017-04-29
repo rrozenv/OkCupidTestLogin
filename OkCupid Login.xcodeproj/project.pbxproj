@@ -14,7 +14,9 @@
 		9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */; };
 		983B0A5C1EAD1E0E0033018E /* InitialSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */; };
 		9842D0BC1EB261EF00730448 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842D0BB1EB261EF00730448 /* DeviceSize.swift */; };
+		9842D0BE1EB268BD00730448 /* ButtonWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842D0BD1EB268BD00730448 /* ButtonWithLabel.swift */; };
 		98757BCB1EB0FC3900BF3BA8 /* BirthYearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */; };
+		98B5E50E1EB4E11E003FB3EB /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5E50D1EB4E11E003FB3EB /* ParticleEmitter.swift */; };
 		98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A21EABB79D000977A5 /* AppDelegate.swift */; };
 		98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A41EABB79D000977A5 /* ViewController.swift */; };
 		98ED40AA1EABB79D000977A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40A91EABB79D000977A5 /* Assets.xcassets */; };
@@ -38,7 +40,9 @@
 		9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialSignUpViewController.swift; path = ../InitialSignUpViewController.swift; sourceTree = "<group>"; };
 		9842D0BB1EB261EF00730448 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
+		9842D0BD1EB268BD00730448 /* ButtonWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithLabel.swift; sourceTree = "<group>"; };
 		98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthYearCell.swift; sourceTree = "<group>"; };
+		98B5E50D1EB4E11E003FB3EB /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
 		98ED409F1EABB79D000977A5 /* OkCupid Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OkCupid Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ED40A21EABB79D000977A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ED40A41EABB79D000977A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,62 @@
 				C605E18A85B25D7C4E16EC8A /* Pods_OkCupid_Login.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9842D0BF1EB2698A00730448 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */,
+				9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */,
+				9842D0BD1EB268BD00730448 /* ButtonWithLabel.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9842D0C01EB2699D00730448 /* UserInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */,
+				9842D0BF1EB2698A00730448 /* Views */,
+			);
+			name = UserInfoViewController;
+			sourceTree = "<group>";
+		};
+		9842D0C11EB269D500730448 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				98ED40B81EABC668000977A5 /* SignupButton.swift */,
+				98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */,
+				98EE4AA71EAD252400258BB3 /* LogoView.swift */,
+				98B5E50D1EB4E11E003FB3EB /* ParticleEmitter.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9842D0C21EB269E400730448 /* InitialSignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */,
+				9842D0C11EB269D500730448 /* Views */,
+			);
+			name = InitialSignUpViewController;
+			sourceTree = "<group>";
+		};
+		9842D0C31EB26A0F00730448 /* LoginWithEmailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				98EE4AA91EAD508500258BB3 /* LoginWithEmailViewController.swift */,
+				9842D0C41EB26A2300730448 /* Views */,
+			);
+			name = LoginWithEmailViewController;
+			sourceTree = "<group>";
+		};
+		9842D0C41EB26A2300730448 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		985F3B3B1EAED1B90012F027 /* Supporting Files */ = {
@@ -134,7 +194,6 @@
 				985F3B3D1EAED2140012F027 /* Resources */,
 				985F3B3C1EAED1CC0012F027 /* Networking */,
 				98EE4AAB1EAD602B00258BB3 /* View Controllers */,
-				98ED40BA1EABD2AD000977A5 /* Custom Views */,
 				985F3B3B1EAED1B90012F027 /* Supporting Files */,
 				98ED40A91EABB79D000977A5 /* Assets.xcassets */,
 				98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */,
@@ -144,25 +203,12 @@
 			path = "OkCupid Login";
 			sourceTree = "<group>";
 		};
-		98ED40BA1EABD2AD000977A5 /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */,
-				9808833C1EAE483D00FEA268 /* HorizontalButtonStackView.swift */,
-				98ED40B81EABC668000977A5 /* SignupButton.swift */,
-				98ED40BB1EABD4A5000977A5 /* LoginButtonView.swift */,
-				98EE4AA71EAD252400258BB3 /* LogoView.swift */,
-				98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */,
-			);
-			name = "Custom Views";
-			sourceTree = "<group>";
-		};
 		98EE4AAB1EAD602B00258BB3 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				983B0A5B1EAD1E0E0033018E /* InitialSignUpViewController.swift */,
-				98EE4AA91EAD508500258BB3 /* LoginWithEmailViewController.swift */,
-				9808833E1EAE4D3B00FEA268 /* UserInfoViewController.swift */,
+				9842D0C21EB269E400730448 /* InitialSignUpViewController */,
+				9842D0C31EB26A0F00730448 /* LoginWithEmailViewController */,
+				9842D0C01EB2699D00730448 /* UserInfoViewController */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -299,8 +345,10 @@
 				98ED40B71EABBB60000977A5 /* Colors.swift in Sources */,
 				9808833D1EAE483D00FEA268 /* HorizontalButtonStackView.swift in Sources */,
 				9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */,
+				9842D0BE1EB268BD00730448 /* ButtonWithLabel.swift in Sources */,
 				9842D0BC1EB261EF00730448 /* DeviceSize.swift in Sources */,
 				98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */,
+				98B5E50E1EB4E11E003FB3EB /* ParticleEmitter.swift in Sources */,
 				98ED40B91EABC668000977A5 /* SignupButton.swift in Sources */,
 				98EE4AA81EAD252400258BB3 /* LogoView.swift in Sources */,
 				98ED40BC1EABD4A5000977A5 /* LoginButtonView.swift in Sources */,
