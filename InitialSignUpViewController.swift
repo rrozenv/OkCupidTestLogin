@@ -97,7 +97,7 @@ extension InitialSignUpViewController {
     
     fileprivate func startParticleAnimation() {
         let particleColors = [Palette.yellow.color, Palette.lightBlue.color, Palette.pink.color]
-        let position = CGPoint(x: 185, y: 183)
+        let position = CGPoint(x: DeviceSize.viewWidth * (185/375), y: DeviceSize.viewHeight * (183/667))
         let particleSize = CGSize(width: 3, height: 3)
         if let image = UIImage(named: "IC_heartParticle")?.cgImage {
             let emmitter = ParticleEmitterLayer(colors: particleColors, position: position, size: particleSize, image: image)
