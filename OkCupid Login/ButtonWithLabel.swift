@@ -14,7 +14,7 @@ class ButtonWithLabel: UIButton {
     
     private var id: String = "N/A"
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Medium", size: 14)
         return label

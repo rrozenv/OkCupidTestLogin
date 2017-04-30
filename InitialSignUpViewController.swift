@@ -24,11 +24,11 @@ final class InitialSignUpViewController: UIViewController {
     }
     
     fileprivate var logoView: LogoView!
-    fileprivate var loveMessage: UIImageView!
-    fileprivate var loveMessageLeadingAnchor: NSLayoutConstraint!
+    fileprivate var chatBubbleImageView: UIImageView!
+    fileprivate var chatBubbleLeadingAnchor: NSLayoutConstraint!
     fileprivate var moleculeImageView: UIImageView!
     fileprivate var moleculeImageTrailingAnchor: NSLayoutConstraint!
-    fileprivate var sloganImage: UIImageView!
+    fileprivate var sloganImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +64,12 @@ extension InitialSignUpViewController {
     }
     
     @objc fileprivate func didPressSignupWithEmail() {
+        emailSignupButton.backgroundColor = Palette.grey.color
         let emailVC = LoginWithEmailViewController()
         emailVC.didPressLogin = false
-        present(emailVC, animated: true, completion: nil)
+        present(emailVC, animated: true) { 
+            self.emailSignupButton.backgroundColor = Palette.lightGrey.color
+        }
     }
     
 }
@@ -77,7 +80,7 @@ extension InitialSignUpViewController {
     
     fileprivate func animateLoveMessage() {
         self.view.layoutIfNeeded()
-        self.loveMessageLeadingAnchor.constant = -30
+        self.chatBubbleLeadingAnchor.constant = -30
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -86,13 +89,13 @@ extension InitialSignUpViewController {
     fileprivate func animateMoleculeImage() {
         self.view.layoutIfNeeded()
         self.moleculeImageTrailingAnchor.constant = 20
-        self.sloganImage.alpha = 1.0
+        self.sloganImageView.alpha = 1.0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
     }
     
-    func startParticleAnimation() {
+    fileprivate func startParticleAnimation() {
         let particleColors = [Palette.yellow.color, Palette.lightBlue.color, Palette.pink.color]
         let position = CGPoint(x: 185, y: 183)
         let particleSize = CGSize(width: 3, height: 3)
@@ -124,16 +127,16 @@ extension InitialSignUpViewController {
     }
     
     fileprivate func setupLoveMessage() {
-        loveMessage = UIImageView()
-        loveMessage.image = #imageLiteral(resourceName: "IC_heartMessage")
+        chatBubbleImageView = UIImageView()
+        chatBubbleImageView.image = #imageLiteral(resourceName: "IC_heartMessage")
         
-        view.insertSubview(loveMessage, aboveSubview: logoView)
-        loveMessage.translatesAutoresizingMaskIntoConstraints = false
-        loveMessage.topAnchor.constraint(equalTo: logoView.topAnchor).isActive = true
-        loveMessageLeadingAnchor = loveMessage.leadingAnchor.constraint(equalTo: logoView.trailingAnchor, constant: DeviceSize.viewHeight * (200/667))
-        loveMessageLeadingAnchor.isActive = true
-        loveMessage.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (45/667)).isActive = true
-        loveMessage.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (52/375)).isActive = true
+        view.insertSubview(chatBubbleImageView, aboveSubview: logoView)
+        chatBubbleImageView.translatesAutoresizingMaskIntoConstraints = false
+        chatBubbleImageView.topAnchor.constraint(equalTo: logoView.topAnchor).isActive = true
+        chatBubbleLeadingAnchor = chatBubbleImageView.leadingAnchor.constraint(equalTo: logoView.trailingAnchor, constant: DeviceSize.viewHeight * (200/667))
+        chatBubbleLeadingAnchor.isActive = true
+        chatBubbleImageView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (45/667)).isActive = true
+        chatBubbleImageView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (52/375)).isActive = true
     }
     
     fileprivate func setupMoleculeImage() {
@@ -150,17 +153,17 @@ extension InitialSignUpViewController {
     }
     
     fileprivate func setupSloganImage() {
-        sloganImage = UIImageView()
-        sloganImage.contentMode = .scaleAspectFit
-        sloganImage.image = #imageLiteral(resourceName: "IC_madnessText")
-        sloganImage.alpha = 0
+        sloganImageView = UIImageView()
+        sloganImageView.contentMode = .scaleAspectFit
+        sloganImageView.image = #imageLiteral(resourceName: "IC_madnessText")
+        sloganImageView.alpha = 0
         
-        view.addSubview(sloganImage)
-        sloganImage.translatesAutoresizingMaskIntoConstraints = false
-        sloganImage.widthAnchor.constraint(equalToConstant: 230).isActive = true
-        sloganImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        sloganImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        sloganImage.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 40).isActive = true
+        view.addSubview(sloganImageView)
+        sloganImageView.translatesAutoresizingMaskIntoConstraints = false
+        sloganImageView.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        sloganImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sloganImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        sloganImageView.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 40).isActive = true
     }
     
     fileprivate func setupLoginButtonView() {

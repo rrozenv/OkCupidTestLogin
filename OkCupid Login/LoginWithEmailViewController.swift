@@ -3,17 +3,17 @@ import UIKit
 
 class LoginWithEmailViewController: UIViewController, UITextFieldDelegate {
     
-    var emailPasswordView: EmailPasswordView!
-    var lineDividerView: UIView!
-    var facebookButton: SignupButton!
-    var dismissIcon: UIButton!
+    fileprivate var emailPasswordView: EmailPasswordView!
+    fileprivate var lineDividerView: UIView!
+    fileprivate var facebookButton: SignupButton!
+    fileprivate var dismissIcon: UIButton!
     
     var didPressLogin: Bool! {
         didSet {
-          setupEmailPasswordView()
-          setupLineDividerView()
-          setupFacebookButton()
-          emailPasswordView.emailTextField.becomeFirstResponder()
+            setupEmailPasswordView()
+            setupLineDividerView()
+            setupFacebookButton()
+            checkIfUserIsSigningUpOrLoggingIn()
         }
     }
     
@@ -23,17 +23,17 @@ class LoginWithEmailViewController: UIViewController, UITextFieldDelegate {
         setupCancelSettingsButton()
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { return true }
     
 }
 
-//MARK: Firebase sign up actions
+//MARK: Actions
 
 extension LoginWithEmailViewController {
     
-    func didPressEmailSignUpButton() {
+    @objc fileprivate func didPressEmailSignUpButton() {
+        
+        emailPasswordView.signUpButton.backgroundColor = Palette.green.color
         
         guard let email = emailPasswordView.emailTextField.text, let password = emailPasswordView.passwordTextField.text else { print("Form is not valid"); return }
         
@@ -45,14 +45,14 @@ extension LoginWithEmailViewController {
                 let userInfoVC = UserInfoViewController()
                 self.present(userInfoVC, animated: true, completion: nil)
             } else {
-                //Show alert
+                //Show error alert
             }
             
         }
 
     }
     
-    func didPressEmailLoginButton() {
+   @objc fileprivate func didPressEmailLoginButton() {
         
         guard let email = emailPasswordView.emailTextField.text, let password = emailPasswordView.passwordTextField.text else { print("Form is not valid"); return }
         
@@ -61,31 +61,50 @@ extension LoginWithEmailViewController {
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             
             if didLogin {
-                self.dismiss(animated: true, completion: nil)
+                let signedInVC = SignedInViewController()
+                self.present(signedInVC, animated: true, completion: nil)
             } else {
-                
+                //Show error alert
             }
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if emailPasswordView.emailTextField.text != nil && emailPasswordView.emailTextField.text != "" {
+            emailPasswordView.signUpButton.alpha = 1.0
+            emailPasswordView.signUpButton.isEnabled = true
+        }
+    }
+    
+    @objc fileprivate func dismissSettingVC() {
+        emailPasswordView.emailTextField.resignFirstResponder()
+        emailPasswordView.passwordTextField.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+    }
 }
+
+//MARK: Setup Views
 
 extension LoginWithEmailViewController {
     
-    func setupEmailPasswordView() {
-        emailPasswordView = EmailPasswordView(frame: CGRect.zero)
-        emailPasswordView.emailTextField.delegate = self
-        emailPasswordView.passwordTextField.delegate = self
-        
-        emailPasswordView.signUpButton.alpha = 0.3
-        emailPasswordView.signUpButton.isEnabled = false
-        
+    fileprivate func checkIfUserIsSigningUpOrLoggingIn() {
         if didPressLogin {
             emailPasswordView.signUpButton.setTitle("log in", for: .normal)
             emailPasswordView.signUpButton.addTarget(self, action: #selector(didPressEmailLoginButton), for: .touchUpInside)
+            emailPasswordView.emailTextField.becomeFirstResponder()
         } else {
             emailPasswordView.signUpButton.setTitle("sign up", for: .normal)
             emailPasswordView.signUpButton.addTarget(self, action: #selector(didPressEmailSignUpButton), for: .touchUpInside)
+            emailPasswordView.emailTextField.becomeFirstResponder()
         }
+    }
+    
+    fileprivate func setupEmailPasswordView() {
+        emailPasswordView = EmailPasswordView(frame: CGRect.zero)
+        emailPasswordView.emailTextField.delegate = self
+        emailPasswordView.passwordTextField.delegate = self
+        emailPasswordView.signUpButton.alpha = 0.3
+        emailPasswordView.signUpButton.isEnabled = false
         
         view.addSubview(emailPasswordView)
         emailPasswordView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +114,7 @@ extension LoginWithEmailViewController {
         emailPasswordView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
     }
     
-    func setupLineDividerView() {
+    fileprivate func setupLineDividerView() {
         lineDividerView = UIView()
         lineDividerView.backgroundColor = Palette.lightGrey.color
         lineDividerView.layer.cornerRadius = 2.0
@@ -109,13 +128,13 @@ extension LoginWithEmailViewController {
         lineDividerView.bottomAnchor.constraint(equalTo: emailPasswordView.topAnchor, constant: -30).isActive = true
     }
     
-    func setupFacebookButton() {
+    fileprivate func setupFacebookButton() {
         if didPressLogin {
             facebookButton = SignupButton(icon: #imageLiteral(resourceName: "IC_facebook"), labelText: "facebook log in", backgroundColor: Palette.navy.color, textColor: UIColor.white)
         } else {
             facebookButton = SignupButton(icon: #imageLiteral(resourceName: "IC_facebook"), labelText: "facebook sign up", backgroundColor: Palette.navy.color, textColor: UIColor.white)
         }
-        
+       
         view.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.leadingAnchor.constraint(equalTo: emailPasswordView.leadingAnchor).isActive = true
@@ -124,9 +143,10 @@ extension LoginWithEmailViewController {
         facebookButton.bottomAnchor.constraint(equalTo: lineDividerView.topAnchor, constant: -30).isActive = true
     }
     
-    func setupCancelSettingsButton() {
+    fileprivate func setupCancelSettingsButton() {
         dismissIcon = UIButton()
         dismissIcon.setBackgroundImage(#imageLiteral(resourceName: "IC_Back Arrow Black"), for: .normal)
+        
         view.addSubview(dismissIcon)
         dismissIcon.translatesAutoresizingMaskIntoConstraints = false
         dismissIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 26).isActive = true
@@ -136,16 +156,4 @@ extension LoginWithEmailViewController {
         dismissIcon.addTarget(self, action: #selector(self.dismissSettingVC), for: .touchUpInside)
     }
     
-    func dismissSettingVC() {
-        emailPasswordView.emailTextField.resignFirstResponder()
-        emailPasswordView.passwordTextField.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if emailPasswordView.emailTextField.text != nil && emailPasswordView.emailTextField.text != "" {
-            emailPasswordView.signUpButton.alpha = 1.0
-            emailPasswordView.signUpButton.isEnabled = true
-        }
-    }
 }

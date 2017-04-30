@@ -17,8 +17,9 @@
 		9842D0BE1EB268BD00730448 /* ButtonWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842D0BD1EB268BD00730448 /* ButtonWithLabel.swift */; };
 		98757BCB1EB0FC3900BF3BA8 /* BirthYearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */; };
 		98B5E50E1EB4E11E003FB3EB /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5E50D1EB4E11E003FB3EB /* ParticleEmitter.swift */; };
+		98B8CDCE1EB64C1900DC8C20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B8CDCD1EB64C1900DC8C20 /* User.swift */; };
+		98B8CDD01EB64EA800DC8C20 /* SignedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B8CDCF1EB64EA800DC8C20 /* SignedInViewController.swift */; };
 		98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A21EABB79D000977A5 /* AppDelegate.swift */; };
-		98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40A41EABB79D000977A5 /* ViewController.swift */; };
 		98ED40AA1EABB79D000977A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40A91EABB79D000977A5 /* Assets.xcassets */; };
 		98ED40AD1EABB79D000977A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */; };
 		98ED40B51EABBADF000977A5 /* EmailPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ED40B41EABBADF000977A5 /* EmailPasswordView.swift */; };
@@ -43,9 +44,10 @@
 		9842D0BD1EB268BD00730448 /* ButtonWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithLabel.swift; sourceTree = "<group>"; };
 		98757BCA1EB0FC3900BF3BA8 /* BirthYearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthYearCell.swift; sourceTree = "<group>"; };
 		98B5E50D1EB4E11E003FB3EB /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
+		98B8CDCD1EB64C1900DC8C20 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		98B8CDCF1EB64EA800DC8C20 /* SignedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedInViewController.swift; sourceTree = "<group>"; };
 		98ED409F1EABB79D000977A5 /* OkCupid Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OkCupid Login.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ED40A21EABB79D000977A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		98ED40A41EABB79D000977A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98ED40A91EABB79D000977A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98ED40AC1EABB79D000977A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		98ED40AE1EABB79D000977A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,14 +145,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		985F3B3B1EAED1B90012F027 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				98ED40A41EABB79D000977A5 /* ViewController.swift */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		985F3B3C1EAED1CC0012F027 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +161,22 @@
 				9808833A1EAE449200FEA268 /* Extensions.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		98B8CDD11EB6530300DC8C20 /* SignedInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				98B8CDCF1EB64EA800DC8C20 /* SignedInViewController.swift */,
+			);
+			name = SignedInViewController;
+			sourceTree = "<group>";
+		};
+		98B8CDD21EB6537D00DC8C20 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				98B8CDCD1EB64C1900DC8C20 /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		98ED40961EABB79C000977A5 = {
@@ -191,10 +201,10 @@
 			isa = PBXGroup;
 			children = (
 				98ED40A21EABB79D000977A5 /* AppDelegate.swift */,
-				985F3B3D1EAED2140012F027 /* Resources */,
-				985F3B3C1EAED1CC0012F027 /* Networking */,
 				98EE4AAB1EAD602B00258BB3 /* View Controllers */,
-				985F3B3B1EAED1B90012F027 /* Supporting Files */,
+				98B8CDD21EB6537D00DC8C20 /* Models */,
+				985F3B3C1EAED1CC0012F027 /* Networking */,
+				985F3B3D1EAED2140012F027 /* Resources */,
 				98ED40A91EABB79D000977A5 /* Assets.xcassets */,
 				98ED40AB1EABB79D000977A5 /* LaunchScreen.storyboard */,
 				980883361EAE3C6600FEA268 /* GoogleService-Info.plist */,
@@ -209,6 +219,7 @@
 				9842D0C21EB269E400730448 /* InitialSignUpViewController */,
 				9842D0C31EB26A0F00730448 /* LoginWithEmailViewController */,
 				9842D0C01EB2699D00730448 /* UserInfoViewController */,
+				98B8CDD11EB6530300DC8C20 /* SignedInViewController */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -338,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98EE4AAA1EAD508500258BB3 /* LoginWithEmailViewController.swift in Sources */,
+				98B8CDD01EB64EA800DC8C20 /* SignedInViewController.swift in Sources */,
 				983B0A5C1EAD1E0E0033018E /* InitialSignUpViewController.swift in Sources */,
 				980883391EAE40C700FEA268 /* FirebaseManager.swift in Sources */,
 				98ED40B51EABBADF000977A5 /* EmailPasswordView.swift in Sources */,
@@ -347,10 +359,10 @@
 				9808833F1EAE4D3B00FEA268 /* UserInfoViewController.swift in Sources */,
 				9842D0BE1EB268BD00730448 /* ButtonWithLabel.swift in Sources */,
 				9842D0BC1EB261EF00730448 /* DeviceSize.swift in Sources */,
-				98ED40A51EABB79D000977A5 /* ViewController.swift in Sources */,
 				98B5E50E1EB4E11E003FB3EB /* ParticleEmitter.swift in Sources */,
 				98ED40B91EABC668000977A5 /* SignupButton.swift in Sources */,
 				98EE4AA81EAD252400258BB3 /* LogoView.swift in Sources */,
+				98B8CDCE1EB64C1900DC8C20 /* User.swift in Sources */,
 				98ED40BC1EABD4A5000977A5 /* LoginButtonView.swift in Sources */,
 				9808833B1EAE449200FEA268 /* Extensions.swift in Sources */,
 				98ED40A31EABB79D000977A5 /* AppDelegate.swift in Sources */,

@@ -19,7 +19,7 @@ final class FirebaseManager {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             
             if error != nil {
-                print("Error: \(error). Could not create user.")
+                print("Error: \(String(describing: error)). Could not create user.")
                 completion(false)
             }
             
@@ -36,7 +36,7 @@ final class FirebaseManager {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             
             if error != nil {
-                print("Error: \(error). Could not login user.")
+                print("Error: \(String(describing: error)). Could not login user.")
                 completion(false)
             }
             
@@ -48,4 +48,33 @@ final class FirebaseManager {
         })
     }
     
+    class func signOutUser() {
+        do { try FIRAuth.auth()?.signOut() } catch { print("User was never signed in") }
+    }
+    
+}
+
+extension FirebaseManager {
+    
+    class func updateUserInfo(gender: String, interestedIn: String, birthYear: String, completion: @escaping (Bool) -> ()) {
+        let values = ["gender": gender, "interestedIn": interestedIn, "birthYear": birthYear]
+        if let userUID = FIRAuth.auth()?.currentUser?.uid {
+            usersRef.child(userUID).updateChildValues(values)
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
+    
+    class func fetchCurrentUser(completion: @escaping (User) -> ()) {
+        
+        if let userUID = FIRAuth.auth()?.currentUser?.uid {
+            usersRef.child(userUID).observe(.value, with: { (snapshot) in
+                let user = User(snapshot: snapshot)
+                completion(user)
+            })
+        }
+        
+    }
+
 }

@@ -3,13 +3,15 @@ import UIKit
 
 class UserInfoViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate var doneButton: UIButton!
+    fileprivate var doneButton: UIButton! {
+        didSet {
+            doneButton.addTarget(self, action: #selector(didPressDoneButton), for: .touchUpInside)
+        }
+    }
     fileprivate var userInfoImageView: UIImageView!
     
     //Select Birth Year Properties
     fileprivate let birthYearCollViewLayout = UICollectionViewFlowLayout()
-    let itemWidth: CGFloat = DeviceSize.viewWidth * (269/375)
-    let itemHeight: CGFloat = DeviceSize.viewHeight * (45/667)
     fileprivate lazy var birthYearCollView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.birthYearCollViewLayout)
     fileprivate var years = [Year]()
     fileprivate let cellID = "BirthYear"
@@ -124,6 +126,20 @@ extension UserInfoViewController {
         }
     }
     
+    @objc fileprivate func didPressDoneButton() {
+        if let userGender = currentGender?.label.text, let userInterest = currentInterest?.label.text, let birthYear = currentYear?.yearText {
+            
+            FirebaseManager.updateUserInfo(gender: userGender, interestedIn: userInterest, birthYear: birthYear) { (didUpdate) in
+                if didUpdate {
+                    let signedInVC = SignedInViewController()
+                    self.present(signedInVC, animated: true, completion: nil)
+                    print("Successfuly updated user")
+                }
+                
+            }
+        }
+    }
+    
 }
 
 //MARK: Birth Year Collection View DataSource
@@ -228,7 +244,7 @@ extension UserInfoViewController {
         birthYearCollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         birthYearCollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         birthYearCollView.bottomAnchor.constraint(equalTo: birthYearLineDividerView.topAnchor, constant: -DeviceSize.viewHeight * (15/667)).isActive = true
-        birthYearCollView.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
+        birthYearCollView.heightAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (45/667)).isActive = true
     }
     
     fileprivate func setupSelectBirthYearLabel() {
