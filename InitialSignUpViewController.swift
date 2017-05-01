@@ -34,19 +34,20 @@ final class InitialSignUpViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setupLogoBackground()
-        setupLoveMessage()
-        setupMoleculeImage()
-        setupSloganImage()
-        setupLoginButtonView()
-        setupEmailSignupButton()
-        setupFacebookSignupButton()
-        startParticleAnimation()
+        setupChatBubbleImageView()
+        setupMoleculeImageView()
+        setupSloganImageView()
+        animateChatBubbleImageView()
+        animateMoleculeImageView()
+        animateSloganImageView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animateLoveMessage()
-        animateMoleculeImage()
+        setupLoginButtonView()
+        setupEmailSignupButton()
+        setupFacebookSignupButton()
+        startParticleAnimation()
     }
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -67,9 +68,7 @@ extension InitialSignUpViewController {
         emailSignupButton.backgroundColor = Palette.grey.color
         let emailVC = LoginWithEmailViewController()
         emailVC.didPressLogin = false
-        present(emailVC, animated: true) { 
-            self.emailSignupButton.backgroundColor = Palette.lightGrey.color
-        }
+        present(emailVC, animated: true, completion: nil)
     }
     
 }
@@ -78,7 +77,7 @@ extension InitialSignUpViewController {
 
 extension InitialSignUpViewController {
     
-    fileprivate func animateLoveMessage() {
+    fileprivate func animateChatBubbleImageView() {
         self.view.layoutIfNeeded()
         self.chatBubbleLeadingAnchor.constant = -30
         UIView.animate(withDuration: 1) {
@@ -86,9 +85,16 @@ extension InitialSignUpViewController {
         }
     }
     
-    fileprivate func animateMoleculeImage() {
+    fileprivate func animateMoleculeImageView() {
         self.view.layoutIfNeeded()
         self.moleculeImageTrailingAnchor.constant = 20
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    fileprivate func animateSloganImageView() {
+        self.view.layoutIfNeeded()
         self.sloganImageView.alpha = 1.0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
@@ -126,7 +132,7 @@ extension InitialSignUpViewController {
         logoView.widthAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (120/667)).isActive = true
     }
     
-    fileprivate func setupLoveMessage() {
+    fileprivate func setupChatBubbleImageView() {
         chatBubbleImageView = UIImageView()
         chatBubbleImageView.image = #imageLiteral(resourceName: "IC_heartMessage")
         
@@ -139,7 +145,7 @@ extension InitialSignUpViewController {
         chatBubbleImageView.widthAnchor.constraint(equalToConstant: DeviceSize.viewWidth * (52/375)).isActive = true
     }
     
-    fileprivate func setupMoleculeImage() {
+    fileprivate func setupMoleculeImageView() {
         moleculeImageView = UIImageView()
         moleculeImageView.image = #imageLiteral(resourceName: "IC_molecule")
         
@@ -152,7 +158,7 @@ extension InitialSignUpViewController {
         moleculeImageView.widthAnchor.constraint(equalToConstant: DeviceSize.viewHeight * (43/667)).isActive = true
     }
     
-    fileprivate func setupSloganImage() {
+    fileprivate func setupSloganImageView() {
         sloganImageView = UIImageView()
         sloganImageView.contentMode = .scaleAspectFit
         sloganImageView.image = #imageLiteral(resourceName: "IC_madnessText")
