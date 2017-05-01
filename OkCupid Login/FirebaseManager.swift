@@ -44,7 +44,6 @@ final class FirebaseManager {
                 print("EXISTING USER: \(user), SIGNED IN!")
                 completion(true)
             }
-            
         })
     }
     
@@ -67,14 +66,12 @@ extension FirebaseManager {
     }
     
     class func fetchCurrentUser(completion: @escaping (User) -> ()) {
-        
         if let userUID = FIRAuth.auth()?.currentUser?.uid {
             usersRef.child(userUID).observe(.value, with: { (snapshot) in
                 let user = User(snapshot: snapshot)
                 completion(user)
             })
         }
-        
     }
 
 }
